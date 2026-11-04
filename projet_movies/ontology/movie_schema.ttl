@@ -1,0 +1,100 @@
+
+@prefix : <http://example.org/movie#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+#################################################################
+# 1. Classes
+#################################################################
+
+:Movie rdf:type rdfs:Class ;
+    rdfs:label "Movie" ;
+    rdfs:comment "A movie in the MovieLens dataset." .
+
+:AnimatedMovie rdf:type rdfs:Class ;
+    rdfs:subClassOf :Movie ;
+    rdfs:label "Animated movie" .
+
+:User rdf:type rdfs:Class ;
+    rdfs:subClassOf foaf:Agent ;
+    rdfs:label "MovieLens user" .
+
+:Rating rdf:type rdfs:Class ;
+    rdfs:label "Rating" .
+
+:Genre rdf:type rdfs:Class ;
+    rdfs:label "Movie genre" .
+
+:Tag rdf:type rdfs:Class ;
+    rdfs:label "Movie tag" .
+
+#################################################################
+# 2. Properties
+#################################################################
+
+:hasTitle rdf:type rdf:Property ;
+    rdfs:domain :Movie ;
+    rdfs:range xsd:string ;
+    rdfs:label "has title" .
+
+:hasTagText rdf:type rdf:Property ;
+    rdfs:domain :Tag ;
+    rdfs:range xsd:string ;
+    rdfs:label "has tag text" .
+
+:hasGenre rdf:type rdf:Property ;
+    rdfs:domain :Movie ;
+    rdfs:range :Genre ;
+    rdfs:label "has genre" .
+
+:hasRating rdf:type rdf:Property ;
+    rdfs:domain :Movie ;
+    rdfs:range :Rating ;
+    rdfs:label "has rating" .
+
+:ratedBy rdf:type rdf:Property ;
+    rdfs:domain :Rating ;
+    rdfs:range :User ;
+    rdfs:label "rated by" .
+
+:ratesMovie rdf:type rdf:Property ;
+    rdfs:domain :Rating ;
+    rdfs:range :Movie ;
+    rdfs:label "rates movie" .
+
+:hasScore rdf:type rdf:Property ;
+    rdfs:domain :Rating ;
+    rdfs:range xsd:decimal ;
+    rdfs:label "has score" .
+
+:hasTag rdf:type rdf:Property ;
+    rdfs:domain :Movie ;
+    rdfs:range :Tag ;
+    rdfs:label "has tag" .
+
+:hasTimestamp rdf:type rdf:Property ;
+    rdfs:domain :Rating ;
+    rdfs:range xsd:integer ;
+    rdfs:label "has timestamp" .
+
+#################################################################
+# 3. Property hierarchy
+#################################################################
+
+:hasAnimationGenre rdf:type rdf:Property ;
+    rdfs:subPropertyOf :hasGenre ;
+    rdfs:domain :Movie ;
+    rdfs:range :Genre ;
+    rdfs:label "has animation genre" .
+    
+:hasGivenRating rdf:type owl:ObjectProperty ;
+    owl:inverseOf :ratedBy ;
+    rdfs:domain :User ;
+    rdfs:range :Rating ;
+    rdfs:label "has given rating" .    
+
+#################################################################
+# 4. Reuse of the FOAF vocabulary
+#################################################################

@@ -1,0 +1,5 @@
+rdflib
+pandas
+fastapi
+uvicorn
+owlrl
